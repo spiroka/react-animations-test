@@ -2,14 +2,33 @@ import React from "react";
 import "./App.css";
 import Reveal from "./reveal";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col, Jumbotron, Container } from "react-bootstrap";
+import { Timeline, Tween } from "react-gsap";
 
 function App() {
   return (
-    <div className="App" style={{ padding: "100px" }}>
-      <h1 style={{ marginTop: "100vh", borderBottom: "1px solid black" }}>
-        GSAP Test
-      </h1>
+    <div className="App" style={{ padding: "0 100px 0" }}>
+      <Jumbotron fluid style={{ height: "400px", marginBottom: "200px" }}>
+        <Container>
+          <Timeline
+            target={
+              <>
+                <h1 style={{ opacity: 0 }}>GSAP Test</h1>
+                <p style={{ opacity: 0 }}>
+                  I have created this project to play around with JavaScript
+                  animations in React.
+                </p>
+              </>
+            }
+          >
+            <Tween to={{ opacity: 1 }} duration={0.5} target={0} position="+=0.5" />
+            <Tween to={{ opacity: 1 }} duration={0.5} target={1} />
+          </Timeline>
+        </Container>
+      </Jumbotron>
+      <h2 style={{ borderBottom: "1px solid black" }}>
+        Reveal when scrolled to
+      </h2>
       <Reveal>
         <Row>
           <Col>
