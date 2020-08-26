@@ -1,14 +1,14 @@
 import React from "react";
 import "./App.css";
-import Reveal from "./reveal";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Row, Col, Jumbotron, Container } from "react-bootstrap";
+import { Jumbotron, Container } from "react-bootstrap";
 import { Timeline, Tween } from "react-gsap";
+import Cards from './cards';
 
 function App() {
   return (
     <div className="App" style={{ padding: "0 100px 0" }}>
-      <Jumbotron fluid style={{ height: "400px", marginBottom: "200px" }}>
+      <Jumbotron fluid style={{ height: "400px", marginBottom: "600px" }}>
         <Container>
           <Timeline
             target={
@@ -26,41 +26,7 @@ function App() {
           </Timeline>
         </Container>
       </Jumbotron>
-      <h2 style={{ borderBottom: "1px solid black" }}>
-        Reveal when scrolled to
-      </h2>
-      <Reveal>
-        <Row>
-          <Col>
-            <Card>
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  Card Subtitle
-                </Card.Subtitle>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col>
-            <Card>
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  Card Subtitle
-                </Card.Subtitle>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Reveal>
+      <Cards />
     </div>
   );
 }
