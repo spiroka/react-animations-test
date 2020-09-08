@@ -1,5 +1,14 @@
 import React, { useEffect, useCallback, useRef, useState } from "react";
-import { Timeline, PlayState, Tween } from "react-gsap";
+
+function clamp(value, min, max) {
+  if (value < min) {
+    return min;
+  } else if (value > max) {
+    return max;
+  } else {
+    return value;
+  }
+}
 
 function Reveal({ children }) {
   const container = useRef();
@@ -7,14 +16,22 @@ function Reveal({ children }) {
 
   const onScroll = useCallback(() => {
     setProgess(
-      document.documentElement.scrollTop / container.current.offsetTop
+      clamp(
+        document.documentElement.scrollTop / (container.current.offsetTop - 200),
+        0,
+        1
+      )
     );
   }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
     setProgess(
-      document.documentElement.scrollTop / container.current.offsetTop
+      clamp(
+        document.documentElement.scrollTop / (container.current.offsetTop - 200),
+        0,
+        1
+      )
     );
 
     return () => window.removeEventListener("scroll", onScroll);
@@ -22,25 +39,14 @@ function Reveal({ children }) {
 
   return (
     <div ref={container}>
-      <Timeline
-        playState={PlayState.pause}
-        totalProgress={progress}
-        target={
-          <div
-            style={{
-              opacity: 0,
-              transform: "translateY(800px)",
-            }}
-          >
-            {children}
-          </div>
-        }
+      <div
+        style={{
+          opacity: progress,
+          transform: `translateY(${800 - 800 * progress}px)`,
+        }}
       >
-        <Tween
-          to={{ opacity: 1, transform: "translateY(0px)" }}
-          duration={500}
-        />
-      </Timeline>
+        {children}
+      </div>
     </div>
   );
 }
