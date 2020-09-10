@@ -1,13 +1,7 @@
 import React, { useEffect, useCallback, useRef, useState } from "react";
 
 function clamp(value, min, max) {
-  if (value < min) {
-    return min;
-  } else if (value > max) {
-    return max;
-  } else {
-    return value;
-  }
+  return Math.max(Math.min(value, max), min);
 }
 
 function Reveal({ children }) {
